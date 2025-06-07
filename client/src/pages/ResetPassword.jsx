@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
+import { useParams } from "react-router-dom";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -49,7 +50,7 @@ const ResetPassword = () => {
   };
 
   console.log('backendUrl:', backendUrl);
-  
+
   return (
     <div className='flex justify-center items-center min-h-[70vh]'>
       <motion.form
