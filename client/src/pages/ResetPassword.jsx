@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 
 import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
-import { useParams } from "react-router-dom";
 
 const ResetPassword = () => {
   const { token } = useParams();
