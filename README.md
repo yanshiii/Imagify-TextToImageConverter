@@ -1,74 +1,109 @@
-# Imagify - Full Stack Text-to-Image Generator App
 
-✨Imagify is a full-featured AI-powered web application that lets users generate images from text using a modern tech stack. It includes user authentication, credit-based generation, responsive UI, and integrated payment processing with Razorpay.
+# 🌟 Imagify - Full Stack Text-to-Image Generator App
 
+**Imagify** is a full-featured AI-powered web application that allows users to generate images from text. It includes authentication, a credit system, Razorpay integration, and a modern responsive UI.
 
-## Features
+---
 
--  Text-to-Image generation using ClipDrop API
--  JWT-based authentication (Login / Signup)
--  Credit system to manage image generation quotas
--  Payment integration with Razorpay for purchasing credits
--  Image generation, preview, and download functionality
--  Responsive design with animated UI components
--  State management using React Context API
--  Backend APIs built with Node.js + Express
--  MongoDB Atlas for data storage
+##  Features
 
+-  Text-to-Image generation using **ClipDrop API**
+-  JWT-based **User Authentication (Login / Signup)**
+-  **Credit system** to manage generation quota
+-  Payment integration with **Razorpay**
+-  Image preview, download, and gallery
+-  Responsive UI with animations using **Framer Motion**
+-  State management with **React Context API**
+-  Full backend with **Node.js + Express**
+-  Database: **MongoDB Atlas**
+
+---
 
 ##  Tech Stack
 
-**Frontend**
+### 🔹 Frontend
 - React.js
 - Tailwind CSS
 - React Router
-- Framer Motion
 - Axios
+- Framer Motion
 - Toastify
 
-**Backend**
+### 🔹 Backend
 - Node.js
 - Express.js
 - MongoDB Atlas
-- JWT for authentication
+- JWT Authentication
 - Razorpay SDK
 
+---
 
 ##  Folder Structure
 
+```
 imagify/
-├── client/ # React frontend
-│ ├── public/
-│ ├── src/
-│ │ ├── assets/
-│ │ ├── components/
-│ │ ├── context/
-│ │ ├── pages/
-│ │ ├── App.js
-│ │ └── index.js
-├── server/ # Node.js backend
-│ ├── controllers/
-│ ├── models/
-│ ├── routes/
-│ ├── middleware/
-│ ├── config/
-│ ├── .env
-│ └── server.js
+├── client/            # React frontend
+│   ├── public/
+│   └── src/
+│       ├── assets/
+│       ├── components/
+│       ├── context/
+│       ├── pages/
+│       ├── App.js
+│       └── index.js
+│
+├── server/            # Node.js backend
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── .env
+│   └── server.js
+```
+
+---
+
+##  Key Functionalities
+
+- **Image Generation** — Input text and get an AI-generated image.
+- **Authentication** — Secure signup/login with JWT.
+- **Credits System** — Users can only generate images if they have credits.
+- **Razorpay Payments** — Users can purchase more credits.
+- **Gallery** — View and download previously generated images.
+- **Responsive Design** — Fully optimized for all devices.
+
+---
+
+##  Database Models
+
+### 🔸 User
+- `name`
+- `email`
+- `password`
+- `credits`
+
+### 🔸 Transaction
+- `userId`
+- `credits`
+- `amount`
+- `status`
+- `plan`
+- `date`
+
+---
 
 
-## Key Functionalities
--  Image Generation: Users can input a text prompt and receive AI-generated images.
--  User Auth: JWT-secured authentication flows with registration and login.
--  Credits System: Generation is limited by user credits; users can purchase more.
--  Razorpay Integration: Smooth checkout and verification for adding credits.
--  Gallery: Generated images are displayed with the ability to download.
--  Responsive UI: Fully responsive design and scroll animations with Framer Motion.
+## 🧑‍💻 Author
 
+**Yanshi Sharma**  
+[GitHub](https://github.com/yanshiii)
 
-## Database Models
+---
 
-**User**
-name, email, password, credits
+##  License
 
-**Transaction**
-userId, credits, amount, status, plan, date
+This project is licensed under the MIT License — see the `LICENSE` file for details.
+
+---
