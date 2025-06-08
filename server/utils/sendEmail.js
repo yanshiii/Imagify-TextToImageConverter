@@ -1,24 +1,30 @@
 import nodemailer from 'nodemailer';
 import { htmlToText } from 'html-to-text';
 
-const sendEmail = async (options) => {
+const sendEmail = async ({ email, subject, html }) => {
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: process.env.SMTP_HOST,                // smtp.gmail.com
+    port: +process.env.SMTP_PORT,               // 587
+    secure: +process.env.SMTP_PORT === 465,     // false for 587 (TLS)
     auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD,
+      user: process.env.SMTP_USER,              // imagifyconverter@gmail.com
+      pass: process.env.SMTP_PASSWORD,          // app password
     },
   });
 
   const mailOptions = {
-    from: 'YourApp <youremail@gmail.com>',
-    to: options.email,
-    subject: options.subject,
-    html: options.message,
-    text: htmlToText(options.message),
+    from: process.env.SMTP_FROM_EMAIL,          // “imagifyconverter@gmail.com”
+    to: email,
+    subject,
+    html,
+    text: htmlToText(html),
   };
 
-  console.log('Email being sent with options:', mailOptions);
+  console.log('📧 Sending mail:', {
+    to: mailOptions.to,
+    subject: mailOptions.subject,
+    htmlLen: mailOptions.html.length,
+  });
 
   await transporter.sendMail(mailOptions);
 };
