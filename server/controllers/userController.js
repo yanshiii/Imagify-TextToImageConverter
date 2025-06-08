@@ -147,16 +147,16 @@ const forgotPassword = async (req, res) => {
     if (!user)
       return res.json({ success: false, message: "User with this email does not exist." });
 
-    const resetToken = crypto.randomBytes(20).toString("hex");
-    user.resetPasswordToken = resetToken;
+    const rawToken = crypto.randomBytes(20).toString("hex");
+    const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
+    user.resetPasswordToken = hashedToken;
     user.resetPasswordExpire = Date.now() + 3600000;
     await user.save();
 
-    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
+
     const message = `
       <h1>Password reset requested</h1>
-      <p>Click the link below to set a new password (valid 1 h):</p>
-      <a href="${resetURL}">${resetURL}</a>
     `;
 
     await sendEmail({
@@ -174,11 +174,11 @@ const forgotPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
-    const { token } = req.params;
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
     const { password } = req.body;
 
     const user = await userModel.findOne({
-      resetPasswordToken: token,
+      resetPasswordToken: hashedToken,
       resetPasswordExpire: { $gt: Date.now() },
     });
 

@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
@@ -11,7 +9,11 @@ import imageRouter from "./routes/imageRoutes.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://imagify-client-6gv7.onrender.com',
+  credentials: true
+}));
+
 app.use(express.json());
 await connectDB(); 
 
