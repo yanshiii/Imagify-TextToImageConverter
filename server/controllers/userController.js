@@ -153,7 +153,7 @@ const forgotPassword = async (req, res) => {
     user.resetPasswordExpire = Date.now() + 3600000;
     await user.save();
 
-    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
 const message = `
   <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
     <h2 style="color: #4A90E2;">Password Reset Request</h2>
