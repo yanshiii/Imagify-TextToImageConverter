@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { htmlToText } from 'html-to-text';
 
 const sendEmail = async (options) => {
     const transporter = nodemailer.createTransport({
@@ -15,7 +16,8 @@ const sendEmail = async (options) => {
         from: process.env.SMTP_FROM_EMAIL,
         to: options.email,
         subject: options.subject,
-        html: options.message,
+        html: options.html,
+        text: options.text || htmlToText(options.html),
     };
 
     await transporter.sendMail(mailOptions);
