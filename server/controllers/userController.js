@@ -153,16 +153,25 @@ const forgotPassword = async (req, res) => {
     user.resetPasswordExpire = Date.now() + 3600000;
     await user.save();
 
-    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
-
-    const message = `
-      <h1>Password reset requested</h1>
-    `;
+    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+const message = `
+  <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+    <h2 style="color: #4A90E2;">Password Reset Request</h2>
+    <p>Hello,</p>
+    <p>We received a request to reset the password for your Imagify account.</p>
+    <p>Click the button below to reset your password. This link is valid for <strong>1 hour</strong>.</p>
+    <p style="text-align: center; margin: 20px 0;">
+      <a href="${resetURL}" style="background-color: #4A90E2; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Reset Password</a>
+    </p>
+    <p>If you did not request this, please ignore this email. Your password will remain secure.</p>
+    <p>Thank you,<br/>The Imagify Team</p>
+  </div>
+`;
 
     await sendEmail({
       email: user.email,
       subject: "Password Reset Request",
-      message,
+      html: message,
     });
 
     res.json({ success: true, message: "Password reset link sent." });
